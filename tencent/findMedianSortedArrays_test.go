@@ -1,36 +1,96 @@
 package tencent
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestFindMedianSortedArrays(t *testing.T) {
-	as := assert.New(t)
+	type args struct {
+		nums1 []int
+		nums2 []int
+	}
+	tests := []struct {
+		name string
+		args args
+		want float64
+	}{
+		{
+			name: "TestFindMedianSortedArrays: [], [2]",
+			args: args{
+				nums1: []int{},
+				nums2: []int{2},
+			},
+			want: 2.0,
+		},
 
-	var result float64
+		{
+			name: "TestFindMedianSortedArrays: [], [2,3]",
+			args: args{
+				nums1: []int{},
+				nums2: []int{2,3},
+			},
+			want: 2.5,
+		},
 
-	result = FindMedianSortedArrays([]int{}, []int{2})
-	as.Equal(2.0, result)
+		{
+			name: "TestFindMedianSortedArrays: [], [2,3,4]",
+			args: args{
+				nums1: []int{},
+				nums2: []int{2,3,4},
+			},
+			want: 3.0,
+		},
 
-	result = FindMedianSortedArrays([]int{}, []int{2, 3})
-	as.Equal(2.5, result)
+		{
+			name: "TestFindMedianSortedArrays: [1], [2]",
+			args: args{
+				nums1: []int{1},
+				nums2: []int{2},
+			},
+			want: 1.5,
+		},
 
-	result = FindMedianSortedArrays([]int{}, []int{2, 3, 4})
-	as.Equal(3.0, result)
+		{
+			name: "TestFindMedianSortedArrays: [1,3], [2]",
+			args: args{
+				nums1: []int{1,3},
+				nums2: []int{2},
+			},
+			want: 2.0,
+		},
 
-	result = FindMedianSortedArrays([]int{1}, []int{2})
-	as.Equal(1.5, result)
+		{
+			name: "TestFindMedianSortedArrays: [1,2], [3,4]",
+			args: args{
+				nums1: []int{1,2},
+				nums2: []int{3,4},
+			},
+			want: 2.5,
+		},
 
-	result = FindMedianSortedArrays([]int{1, 3}, []int{2})
-	as.Equal(2.0, result)
+		{
+			name: "TestFindMedianSortedArrays: [1,2], [3,4]",
+			args: args{
+				nums1: []int{1,2,3},
+				nums2: []int{3,4},
+			},
+			want: 3.0,
+		},
 
-	result = FindMedianSortedArrays([]int{1, 2}, []int{3, 4})
-	as.Equal(2.5, result)
-
-	result = FindMedianSortedArrays([]int{1, 2, 3}, []int{3, 4})
-	as.Equal(3.0, result)
-
-	result = FindMedianSortedArrays([]int{1}, []int{2, 3, 4, 5, 6})
-	as.Equal(3.5, result)
+		{
+			name: "TestFindMedianSortedArrays: [1,2], [3,4]",
+			args: args{
+				nums1: []int{1},
+				nums2: []int{2,3,4,5,6},
+			},
+			want: 3.5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindMedianSortedArrays(tt.args.nums1, tt.args.nums2); got != tt.want {
+				t.Errorf("FindMedianSortedArrays() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }

@@ -1,29 +1,71 @@
 package tencent
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestLongestPalindrome(t *testing.T) {
-	as := assert.New(t)
-	var s string
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "TestLongestPalindrome: babad",
+			args: args{
+				s: "babad",
+			},
+			want: "bab",
+		},
 
-	s = LongestPalindrome("babad")
-	as.Equal("bab", s)
+		{
+			name: "TestLongestPalindrome: cbbd",
+			args: args{
+				s: "cbbd",
+			},
+			want: "bb",
+		},
 
-	s = LongestPalindrome("cbbd")
-	as.Equal("bb", s)
+		{
+			name: "TestLongestPalindrome: a",
+			args: args{
+				s: "a",
+			},
+			want: "a",
+		},
 
-	s = LongestPalindrome("a")
-	as.Equal("a", s)
+		{
+			name: "TestLongestPalindrome: ac",
+			args: args{
+				s: "ac",
+			},
+			want: "a",
+		},
 
-	s = LongestPalindrome("ac")
-	as.Equal("a", s)
+		{
+			name: "TestLongestPalindrome: bb",
+			args: args{
+				s: "bb",
+			},
+			want: "bb",
+		},
 
-	s = LongestPalindrome("bb")
-	as.Equal("bb", s)
-
-	s = LongestPalindrome("")
-	as.Equal("", s)
+		{
+			name: "TestLongestPalindrome: ",
+			args: args{
+				s: "",
+			},
+			want: "",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := LongestPalindrome(tt.args.s); got != tt.want {
+				t.Errorf("LongestPalindrome() = %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
